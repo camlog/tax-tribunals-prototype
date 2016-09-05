@@ -1,23 +1,22 @@
 'use strict';
 
 moj.Modules.formRoutes = {
-  form_class: 'js_route',
-
   init: function() {
     var self = this;
 
-    if($('form.' + self.form_class).length) {
+    if($('form').length) {
       self.bindEvents();
     }
   },
 
   bindEvents: function() {
     var self = this,
-        $form = $('form.' + self.form_class).eq(0);
+        $form = $('form').eq(0);
 
     $form.on('submit', function(e) {
       e.preventDefault();
 
+      moj.Modules.dataStore.checkForItemsToStore($form);
       self.checkRoute($form);
     });
   },
